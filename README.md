@@ -236,7 +236,14 @@ kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheu
     You need to apply the Prometheus operator manifest. Please visit the official [prometheus-operator GitHub](https://github.com/prometheus-operator/prometheus-operator) for the latest stable version of the manifest file. As of my knowledge cut-off in September 2021, you could use the following command:
     
     ```bash
-    kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/release-0.52/bundle.yaml -n monitoring
+    # Add the prometheus-community Helm repo
+    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+    # Update the Helm repo
+    helm repo update
+
+    # Install Prometheus
+    helm install prometheus prometheus-community/prometheus --namespace monitoring
     ```
 
 2. **Verify the installation**: 
