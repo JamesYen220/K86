@@ -1,4 +1,4 @@
-**部署自己之前的作业到Kubernetes上，需要编写一个deployment的yaml文件
+**部署自己之前的作业到Kubernetes上，需要编写一个deployment的yaml文件**
 
 1. Create a Java Spring Boot application
 2. Containerize the application using Docker
