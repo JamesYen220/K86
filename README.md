@@ -165,6 +165,9 @@ When you navigate to this URL in a web browser, you should see your "Hello, worl
 
 That's it! You've successfully deployed your Spring Boot "Hello World" application to a Kubernetes cluster using Minikube and Docker. Please let me know if you have any questions or run into any issues!
 
+<img width="745" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/1b7f1219-8015-4969-a17f-21273cf9e6cc">
+<img width="1405" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/5ffdb18f-c039-4978-9719-a50a4524f1c7">
+
 
 **2. 能够动态扩缩容，在yaml文件里写好相关配置后就能实现**
 The requirement you mentioned is to dynamically scale the application, and you want the related configurations to be written in the YAML file.
@@ -201,3 +204,9 @@ This configuration will create a Horizontal Pod Autoscaler that manages the numb
 Remember that HPA is based on the metrics available in your cluster. The example above uses CPU utilization, but Kubernetes can also scale based on memory usage and custom metrics, provided that the metrics are available in your cluster.
 
 Also note that this is a basic example and actual values for `minReplicas`, `maxReplicas` and `averageUtilization` should be chosen based on the requirements of your specific application and environment.
+
+<img width="770" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/eae039a5-80be-48b5-b5ad-56234b37a12c">
+
+
+**3. 利用Prometheus监控Kubernete以及其上的应用**
+
