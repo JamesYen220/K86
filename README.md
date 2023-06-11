@@ -167,3 +167,37 @@ That's it! You've successfully deployed your Spring Boot "Hello World" applicati
 
 
 **2. 能够动态扩缩容，在yaml文件里写好相关配置后就能实现**
+The requirement you mentioned is to dynamically scale the application, and you want the related configurations to be written in the YAML file.
+
+Kubernetes provides a feature called the Horizontal Pod Autoscaler (HPA) that automatically scales the number of pods in a replication controller, deployment, replica set or stateful set based on observed CPU utilization.
+
+Here's how you can set it up:
+
+1. First, you need to make sure that the metrics server is running in your cluster. The Horizontal Pod Autoscaler uses the metrics server to fetch metrics like CPU utilization. In Minikube, you can enable it with the command `minikube addons enable metrics-server`.
+
+2. Next, you'll need to define a HorizontalPodAutoscaler resource. This can be done in the same YAML file as your deployment, or in a separate file. Here's an example configuration:
+
+```yaml
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hello-world-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hello-world
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+```
+
+This configuration will create a Horizontal Pod Autoscaler that manages the number of pods in the `hello-world` deployment. The number of pods will be between `minReplicas` and `maxReplicas`, scaling based on CPU utilization. In this case, if the average CPU utilization across all pods exceeds 50%, Kubernetes will start creating new pods. If CPU utilization drops below 50%, it will start removing pods, down to a minimum of 1.
+
+3. You can apply this configuration with `kubectl apply -f hpa.yaml`, if you put it in a separate file named `hpa.yaml`.
+
+4. To check the status of the HPA, you can use the command `kubectl get hpa`.
+
+Remember that HPA is based on the metrics available in your cluster. The example above uses CPU utilization, but Kubernetes can also scale based on memory usage and custom metrics, provided that the metrics are available in your cluster.
+
+Also note that this is a basic example and actual values for `minReplicas`, `maxReplicas` and `averageUtilization` should be chosen based on the requirements of your specific application and environment.
