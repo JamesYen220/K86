@@ -227,6 +227,29 @@ kubectl create namespace monitoring
 kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/release-0.51/bundle.yaml
 ```
 
+**Create monitoring namespace**
+
+1 **Install Prometheus Operator**: 
+
+    Prometheus Operator manages Prometheus clusters atop Kubernetes. It simplifies the deployment and configuration of Prometheus, Alertmanager, and related monitoring components. The Operator automatically generates Prometheus scrape configuration based on the definition.
+
+    You need to apply the Prometheus operator manifest. Please visit the official [prometheus-operator GitHub](https://github.com/prometheus-operator/prometheus-operator) for the latest stable version of the manifest file. As of my knowledge cut-off in September 2021, you could use the following command:
+    ```
+    kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/release-0.52/bundle.yaml -n monitoring
+    ```
+    **Note**: Please replace the URL with the latest stable version.
+
+2. **Verify the installation**: 
+
+    After a while, verify that the Prometheus Operator components are deployed:
+
+    ```
+    kubectl get pods -n monitoring
+    ```
+
+You should see several pods starting with `prometheus-operator-...` in the "monitoring" namespace. If this works, then you can proceed with the rest of the Prometheus setup.
+
+
 **Step 2: Create a Prometheus instance**
 
 You can create a Prometheus instance by applying a YAML file with a `Prometheus` resource. Here's an example:
@@ -383,6 +406,7 @@ spec:
 ```shell
 kubectl apply -f servicemonitor.yaml
 ```
+
 
 **Verifying Your Prometheus Setup**
 
