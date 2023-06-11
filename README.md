@@ -384,10 +384,31 @@ spec:
 kubectl apply -f servicemonitor.yaml
 ```
 
-Great, now we have the latest versions for Prometheus, node_exporter, and kube-state-metrics as of June 2023. They are:
+**Verifying Your Prometheus Setup**
 
-- Prometheus: v2.45.0-rc.0【17†source】
-- node_exporter: v1.6.0【21†source】
-- kube-state-metrics: v2.9.2【25†source】
+After setting up Prometheus and configuring your application to expose metrics, you can verify that Prometheus is successfully scraping metrics from your application by accessing the Prometheus dashboard:
 
-When installing these components, make sure to check their respective official documentation or GitHub repositories for the most accurate and up-to-date installation guides. The steps I provided above should give you a general idea of how to set up Prometheus with Kubernetes, but details might vary slightly depending on the exact versions and your specific environment.
+1. Run the following command to set up port forwarding:
+
+```bash
+kubectl port-forward svc/prometheus-operator-prometheus -n monitoring 9090
+```
+
+To check the service name of your Prometheus instance in Kubernetes, you can use the following command:
+
+```
+kubectl get services -n monitoring
+```
+
+This command will list all the services in the "monitoring" namespace. Look for the Prometheus service in the output. The service name should be displayed in the "NAME" column.
+
+
+Replace `<prometheus-service-name>` with the actual service name of your Prometheus instance, and then you can access the Prometheus dashboard by navigating to http://localhost:9090 in your web browser.
+
+2. Open a web browser and navigate to `http://localhost:9090`.
+
+3. Click on the "Status" dropdown menu and select "Targets". You should see your application listed as a target, with the status "UP".
+
+4. You can also query your application's metrics: type the metric's name into the "Expression" input field and click "Execute".
+
+Remember to replace `prometheus-operator-prometheus` with the service name of your Prometheus instance if you named it differently.
