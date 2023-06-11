@@ -229,15 +229,15 @@ kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheu
 
 **Create monitoring namespace**
 
-1 **Install Prometheus Operator**: 
+1. **Install Prometheus Operator**: 
 
     Prometheus Operator manages Prometheus clusters atop Kubernetes. It simplifies the deployment and configuration of Prometheus, Alertmanager, and related monitoring components. The Operator automatically generates Prometheus scrape configuration based on the definition.
 
     You need to apply the Prometheus operator manifest. Please visit the official [prometheus-operator GitHub](https://github.com/prometheus-operator/prometheus-operator) for the latest stable version of the manifest file. As of my knowledge cut-off in September 2021, you could use the following command:
-    ```
+    
+    ```bash
     kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/release-0.52/bundle.yaml -n monitoring
     ```
-    **Note**: Please replace the URL with the latest stable version.
 
 2. **Verify the installation**: 
 
