@@ -222,20 +222,14 @@ Here are the steps to setup Prometheus for Kubernetes:
 
 To install Prometheus, you can create a new namespace and apply the Prometheus operator manifest:
 
-```bash
-kubectl create namespace monitoring
-kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/release-0.51/bundle.yaml
-```
 
 **Create monitoring namespace**
 
 1. **Install Prometheus Operator**: 
-
-    Prometheus Operator manages Prometheus clusters atop Kubernetes. It simplifies the deployment and configuration of Prometheus, Alertmanager, and related monitoring components. The Operator automatically generates Prometheus scrape configuration based on the definition.
-
-    You need to apply the Prometheus operator manifest. Please visit the official [prometheus-operator GitHub](https://github.com/prometheus-operator/prometheus-operator) for the latest stable version of the manifest file. As of my knowledge cut-off in September 2021, you could use the following command:
     
     ```bash
+    kubectl create namespace monitoring
+
     # Add the prometheus-community Helm repo
     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
