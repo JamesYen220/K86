@@ -1,4 +1,4 @@
-**部署自己之前的作业到Kubernetes上，需要编写一个deployment的yaml文件**
+**1. 部署自己之前的作业到Kubernetes上，需要编写一个deployment的yaml文件**
 
 1. Create a Java Spring Boot application
 2. Containerize the application using Docker
@@ -164,3 +164,6 @@ minikube service hello-world --url
 When you navigate to this URL in a web browser, you should see your "Hello, world!" message.
 
 That's it! You've successfully deployed your Spring Boot "Hello World" application to a Kubernetes cluster using Minikube and Docker. Please let me know if you have any questions or run into any issues!
+
+
+**2. 能够动态扩缩容，在yaml文件里写好相关配置后就能实现**
