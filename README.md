@@ -274,7 +274,7 @@ spec:
 This will create a Prometheus instance that will monitor services labeled with `team: frontend`. You can adjust the `matchLabels` to match your environment.
 
 ```shell
-kubectl apply -f prometheus.yaml
+kubectl apply -f prometheus-instance.yaml
 ```
 
 **Step 3: Install node_exporter**
