@@ -4,7 +4,9 @@ Sure, I can help you with that. We'll follow these high-level steps:
 2. Containerize the application using Docker
 3. Push the Docker image to a registry
 4. Install and start Minikube
+    - brew install minikube
 5. Write a Kubernetes deployment YAML file
+    - brew install kubectl
 6. Deploy the application on Minikube
 
 Let's break down each step:
