@@ -136,13 +136,14 @@ This will create the deployment in our Kubernetes cluster. You can check the sta
 ```bash
 kubectl get deployments
 ```
+<img width="466" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/842857eb-1f6f-4e5e-a98b-2dcde940e048">
 
 You should see your `hello-world` listed.
 
 Now we need to expose the deployment as a service so we can access it. Run the following command:
 
 ```bash
-kubectl expose deployment helloworld-deployment --type=NodePort --port=8080
+kubectl expose deployment hello-world --type=NodePort --port=8080
 ```
 
 This will create a service that exposes our application to external traffic. By specifying `type=NodePort`, Kubernetes will allocate a port on each node for our service.
@@ -153,7 +154,9 @@ You can view the service with the following command:
 kubectl get services
 ```
 
-You should see your `helloworld-deployment` service listed, along with the port it's been assigned on the node.
+You should see your `hello-world` service listed, along with the port it's been assigned on the node.
+<img width="708" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/dd4de4c9-6722-49a4-b251-442b2fc7c5d1">
+
 
 Finally, to access the application, you can ask Minikube to give you the URL of the service:
 
@@ -209,4 +212,182 @@ Also note that this is a basic example and actual values for `minReplicas`, `max
 
 
 **3. 利用Prometheus监控Kubernete以及其上的应用**
+Monitoring your Kubernetes cluster and the applications running on it with Prometheus is a great choice. Prometheus, a CNCF project, is a systems and service monitoring system. It collects metrics from configured targets at given intervals, evaluates rule expressions, displays the results, and can trigger alerts if some condition is observed to be true. 
 
+To use Prometheus for monitoring, you'll need to install Prometheus itself, as well as node_exporter for machine metrics, and kube-state-metrics for cluster metrics. You'll also need to configure your applications to expose Prometheus metrics.
+
+Here are the steps to setup Prometheus for Kubernetes:
+
+**Step 1: Install Prometheus**
+
+To install Prometheus, you can create a new namespace and apply the Prometheus operator manifest:
+
+```bash
+kubectl create namespace monitoring
+kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/release-0.51/bundle.yaml
+```
+
+**Step 2: Create a Prometheus instance**
+
+You can create a Prometheus instance by applying a YAML file with a `Prometheus` resource. Here's an example:
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  serviceAccountName: prometheus
+  serviceMonitorSelector:
+    matchLabels:
+      team: frontend
+  resources:
+    requests:
+      memory: 400Mi
+  enableAdminAPI: false
+```
+
+This will create a Prometheus instance that will monitor services labeled with `team: frontend`. You can adjust the `matchLabels` to match your environment.
+
+```shell
+kubectl apply -f prometheus.yaml
+```
+
+**Step 3: Install node_exporter**
+
+Node_exporter is a Prometheus exporter for machine metrics. You can install it with the following commands:
+
+```bash
+brew install helm
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install [RELEASE_NAME] prometheus-community/prometheus-node-exporter
+```
+
+In this command, replace `[RELEASE_NAME]` with the name you want to give to this release of the application. If you're running these commands for the first time, Helm will download the chart from the Prometheus community Helm chart repository, update the chart with the latest information from the repository, and then install the application with the name you've specified.
+
+**Step 4: Install kube-state-metrics**
+
+Kube-state-metrics is a service that listens to the Kubernetes API server and generates metrics about the state of the objects. It's not focused on the health of the individual Kubernetes components, but rather on the health of the various objects inside, such as deployments, nodes and pods.
+
+You can install it with the following command:
+
+```yaml
+apiVersion: apps/v1  
+kind: Deployment  
+metadata:  
+  labels:  
+    app.kubernetes.io/component: exporter  
+    app.kubernetes.io/name: kube-state-metrics  
+    app.kubernetes.io/version: 2.9.2  
+  name: kube-state-metrics  
+  namespace: kube-system  
+spec:  
+  replicas: 1  
+  selector:  
+    matchLabels:  
+      app.kubernetes.io/name: kube-state-metrics  
+  template:  
+    metadata:  
+      labels:  
+        app.kubernetes.io/component: exporter  
+        app.kubernetes.io/name: kube-state-metrics  
+        app.kubernetes.io/version: 2.9.2  
+    spec:  
+      automountServiceAccountToken: true  
+      containers:  
+      - image: registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.9.2  
+        livenessProbe:  
+          httpGet:  
+            path: /healthz  
+            port: 8080  
+          initialDelaySeconds: 5  
+          timeoutSeconds: 5  
+        name: kube-state-metrics  
+        ports:  
+        - containerPort: 8080  
+          name: http-metrics  
+        - containerPort: 8081  
+          name: telemetry  
+        readinessProbe:  
+          httpGet:  
+            path: /  
+            port: 8081  
+          initialDelaySeconds: 5  
+          timeoutSeconds: 5  
+        securityContext:  
+          allowPrivilegeEscalation: false  
+          capabilities:  
+            drop:  
+            - ALL  
+          readOnlyRootFilesystem: true  
+          runAsNonRoot: true  
+          runAsUser: 65534  
+          seccompProfile:  
+            type: RuntimeDefault  
+      nodeSelector:  
+        kubernetes.io/os: linux  
+      serviceAccountName: kube-state-metrics
+```
+
+You can save this content into a file (let's call it `kube-state-metrics.yaml`) and then apply it using the following command:
+
+```shell
+kubectl apply -f kube-state-metrics.yaml
+```
+
+**Step 5: Expose application metrics**
+
+To monitor your applications with Prometheus, they need to expose a `/metrics` HTTP endpoint that returns current metrics in Prometheus format. Spring Boot applications can use the Actuator's `prometheus` micrometer to expose these metrics. You can add these to your application's properties:
+
+```properties
+management.endpoints.web.exposure.include=*
+management.endpoint.metrics.enabled=true
+management.endpoint.prometheus.enabled=true
+management.metrics.export.prometheus.enabled=true
+```
+
+You'll also need to add the micrometer dependency to your `pom.xml`:
+
+```xml
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>1.7.3</version>
+        </dependency>
+```
+
+Once your application is exposing metrics, you can add a `ServiceMonitor` to tell Prometheus to scrape metrics from your application:
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hello-world-monitor
+  labels:
+    team: frontend
+spec:
+  selector:
+    matchLabels:
+      app: hello-world
+  endpoints:
+  - port: web
+    path: /actuator/prometheus
+```
+```shell
+kubectl apply -f servicemonitor.yaml
+```
+
+Great, now we have the latest versions for Prometheus, node_exporter, and kube-state-metrics as of June 2023. They are:
+
+- Prometheus: v2.45.0-rc.0【17†source】
+- node_exporter: v1.6.0【21†source】
+- kube-state-metrics: v2.9.2【25†source】
+
+When installing these components, make sure to check their respective official documentation or GitHub repositories for the most accurate and up-to-date installation guides. The steps I provided above should give you a general idea of how to set up Prometheus with Kubernetes, but details might vary slightly depending on the exact versions and your specific environment.
