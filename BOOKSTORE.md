@@ -454,17 +454,16 @@ kubectl get services -n monitoring
 
 This command will list all the services in the "monitoring" namespace. Look for the Prometheus service in the output. The service name should be displayed in the "NAME" column.
 
-<img width="815" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/b09b46a7-7cc0-44fb-bf74-5ada4516d49a">
+<img width="900" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/43bb3055-cab1-4b5f-9196-76643b1a9673">
 
 2. Open a web browser and navigate to `http://localhost:9090`.
 <img width="1728" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/47d977a2-f028-4485-80a1-49da8ef441f6">
 
 3. Click on the "Status" dropdown menu and select "Targets". You should see your application listed as a target, with the status "UP".
-<img width="1728" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/fbbc39d0-945e-4461-b640-f270927a7548">
-<img width="1721" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/43650dfc-f414-4349-94a1-c0088109344c">
-<img width="1720" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/311aaa4d-1021-4788-aaf0-ccb39bb228bc">
-<img width="1711" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/911578c9-9ded-40f7-8c61-69f1773b1379">
-
+<img width="1728" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/9b5332d3-f5bd-43da-a1d3-ed941ede61f9">
+<img width="1726" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/c10355bd-8d3c-437a-9a20-e6591ebf2e1f">
+<img width="1726" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/fbd8e4be-2fbb-4deb-a028-ac9e23bf3e21">
+<img width="1728" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/5ac28384-4fa1-427b-bfda-0ffa3159d600">
 
 4. You can also query your application's metrics: type the metric's name into the "Expression" input field and click "Execute".
 
