@@ -162,37 +162,6 @@ kubectl get deployments
 
 You should see your `hello-world` listed.
 
-Now we need to expose the deployment as a service so we can access it. Run the following command:
-
-```bash
-kubectl expose deployment hello-world --type=NodePort --port=8080
-```
-
-This will create a service that exposes our application to external traffic. By specifying `type=NodePort`, Kubernetes will allocate a port on each node for our service.
-
-You can view the service with the following command:
-
-```bash
-kubectl get services
-```
-
-You should see your `hello-world` service listed, along with the port it's been assigned on the node.
-<img width="708" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/dd4de4c9-6722-49a4-b251-442b2fc7c5d1">
-
-
-Finally, to access the application, you can ask Minikube to give you the URL of the service:
-
-```bash
-minikube service hello-world --url
-```
-
-When you navigate to this URL in a web browser, you should see your "Hello, world!" message.
-
-That's it! You've successfully deployed your Spring Boot "Hello World" application to a Kubernetes cluster using Minikube and Docker. Please let me know if you have any questions or run into any issues!
-
-<img width="745" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/1b7f1219-8015-4969-a17f-21273cf9e6cc">
-<img width="1405" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/5ffdb18f-c039-4978-9719-a50a4524f1c7">
-
 
 **Deployment or Pods not working**
 
@@ -225,6 +194,39 @@ kubectl logs <pod-name>
 ```
 
 Replace `<pod-name>` with the name of one of the pods that's not running properly. This should give you more insight into what might be going wrong.
+
+
+Now we need to expose the deployment as a service so we can access it. Run the following command:
+
+```bash
+kubectl expose deployment hello-world --type=NodePort --port=8080
+```
+
+This will create a service that exposes our application to external traffic. By specifying `type=NodePort`, Kubernetes will allocate a port on each node for our service.
+
+You can view the service with the following command:
+
+```bash
+kubectl get services
+```
+
+You should see your `hello-world` service listed, along with the port it's been assigned on the node.
+<img width="708" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/dd4de4c9-6722-49a4-b251-442b2fc7c5d1">
+
+
+Finally, to access the application, you can ask Minikube to give you the URL of the service:
+
+```bash
+minikube service hello-world --url
+```
+
+When you navigate to this URL in a web browser, you should see your "Hello, world!" message.
+
+That's it! You've successfully deployed your Spring Boot "Hello World" application to a Kubernetes cluster using Minikube and Docker. Please let me know if you have any questions or run into any issues!
+
+<img width="745" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/1b7f1219-8015-4969-a17f-21273cf9e6cc">
+<img width="1405" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/5ffdb18f-c039-4978-9719-a50a4524f1c7">
+
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
