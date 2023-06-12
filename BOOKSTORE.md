@@ -43,8 +43,8 @@ docker build -t bookstore .
 For Minikube to pull the Docker image, it needs to be hosted on a Docker registry. For this guide, we'll use Docker's public registry, Docker Hub.
 
 1. Login to Docker Hub using the command: `docker login`. Provide your Docker Hub username and password.
-2. Tag the image with your Docker Hub username: `docker tag hello-world:latest <your-username>/hello-world:latest`.
-3. Push the image to Docker Hub: `docker push <your-username>/hello-world:latest`.
+2. Tag the image with your Docker Hub username: `docker tag bookstore:latest jamesyen220/bookstore:latest`.
+3. Push the image to Docker Hub: `docker push jamesyen220/bookstore:latest`.
 
 **Step 4: Install and start Minikube**
 
