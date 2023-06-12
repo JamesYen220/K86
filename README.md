@@ -9,6 +9,28 @@
     - brew install kubectl
 6. Deploy the application on Minikube
 
+**Some basic concepts**
+
+Kubectl, Kubernetes, and Minikube are all related to the management and deployment of containerized applications in a Kubernetes environment. Here's an overview of their relationship:
+
+1. Kubernetes: Kubernetes is an open-source container orchestration platform developed by Google. It provides a framework for automating the deployment, scaling, and management of containerized applications across a cluster of machines. Kubernetes abstracts the underlying infrastructure and provides a consistent way to manage and control containers.
+
+2. Minikube: Minikube is a lightweight tool that enables local development and testing of Kubernetes applications. It creates a single-node Kubernetes cluster on a local machine, providing an environment that mimics a full-scale Kubernetes cluster. Minikube is useful for developers who want to experiment with Kubernetes features, test their applications, or learn Kubernetes without the need for a full production cluster.
+
+3. Kubectl: Kubectl is the official command-line tool for interacting with Kubernetes clusters. It acts as a client to the Kubernetes API server and allows users to deploy and manage applications, inspect and modify cluster resources, and view logs and events. Kubectl enables administrators and developers to control and monitor the Kubernetes cluster from the command line or through scripts. Kubectl can be used to monitor and interact with the activity in a Minikube cluster. When you start a Minikube cluster, it creates a single-node Kubernetes cluster on your local machine. You can then use kubectl commands to manage and monitor the resources within that Minikube cluster.
+
+Docker plays a crucial role in the relationship between Kubectl, Kubernetes, and Minikube. Here's how Docker fits into the picture:
+
+1. Docker: Docker is a popular containerization platform that allows you to package applications and their dependencies into containers. Containers are lightweight, isolated environments that encapsulate an application and all its necessary dependencies, enabling consistent deployment and execution across different environments.
+
+2. Kubernetes and Containers: Kubernetes works with containers to manage and orchestrate application deployments. It leverages Docker (or other container runtimes) as the default container runtime to create, run, and manage containers on individual nodes within a Kubernetes cluster. Kubernetes treats containers as the basic units of deployment and scaling.
+
+3. Minikube and Docker: Minikube uses Docker as the default container runtime to create and manage containers within the Minikube cluster. When you start a Minikube cluster, it provisions a single-node Kubernetes cluster, and Docker is used by Minikube to run containers on that node. Minikube interacts with Docker to create and manage the containers required for running Kubernetes applications locally.
+
+4. Kubectl and Containers: Kubectl, as the command-line interface to Kubernetes, interacts with containers indirectly through the Kubernetes API server. When you use kubectl commands to deploy or manage applications, Kubernetes translates those commands into actions on the underlying containers managed by Docker (or the container runtime in use).
+
+In summary, Docker provides the containerization technology that Kubernetes leverages to deploy and manage applications. Minikube, as a local Kubernetes cluster, uses Docker as the container runtime. Kubectl interacts with Kubernetes, which in turn manages the containers using Docker. Docker, therefore, plays a crucial role in containerization, while Kubernetes and Minikube provide the orchestration and management layers for running containers in a scalable and distributed manner.
+
 Let's break down each step:
 
 **Step 1: Create a Java Spring Boot application**
