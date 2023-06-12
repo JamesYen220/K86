@@ -441,7 +441,7 @@ After setting up Prometheus and configuring your application to expose metrics, 
 1. Run the following command to set up port forwarding:
 
 ```bash
-kubectl port-forward svc/prometheus-operator-prometheus -n monitoring 9090
+kubectl port-forward svc/prometheus-operated -n monitoring 9090
 ```
 
 To check the service name of your Prometheus instance in Kubernetes, you can use the following command:
@@ -449,6 +449,8 @@ To check the service name of your Prometheus instance in Kubernetes, you can use
 ```
 kubectl get services -n monitoring
 ```
+<img width="770" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/b097935a-1d74-4ca5-9f8d-b4bb7668a1bb">
+
 
 This command will list all the services in the "monitoring" namespace. Look for the Prometheus service in the output. The service name should be displayed in the "NAME" column.
 
