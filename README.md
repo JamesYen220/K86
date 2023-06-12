@@ -75,7 +75,7 @@ ENTRYPOINT ["java","-jar","/bookstore.jar"]
 3. To create the Docker image, first you need to build your application. Navigate to the root directory of your application in terminal and run the following command: 
 
 ```bash
-./mvnw package
+mvn package
 ```
 
 4. After the build is successful, create the Docker image using the following command:
