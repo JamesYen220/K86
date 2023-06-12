@@ -13,6 +13,10 @@
 **Step 1: Use exisiting bookstore application**
 
 Open working bookstore application in intellij
+It is importnat to change spring.datasource.url=jdbc:mysql://10.119.12.43:3306/store to a cloud url that can be accessed from inside the docker container.
+
+<img width="502" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/df2540d1-0a0b-4135-9c62-75e039245201">
+
 
 **Step 2: Containerize the application using Docker**
 
