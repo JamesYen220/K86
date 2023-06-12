@@ -170,23 +170,21 @@ You can view the service with the following command:
 kubectl get services
 ```
 
-You should see your `hello-world` service listed, along with the port it's been assigned on the node.
-<img width="708" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/dd4de4c9-6722-49a4-b251-442b2fc7c5d1">
-
+You should see your `bookstore` service listed, along with the port it's been assigned on the node.
+<img width="882" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/483f8813-ff30-4167-a055-5a82ed298023">
 
 Finally, to access the application, you can ask Minikube to give you the URL of the service:
 
 ```bash
-minikube service hello-world --url
+minikube service bookstore --url
 ```
 
 When you navigate to this URL in a web browser, you should see your "Hello, world!" message.
 
 That's it! You've successfully deployed your Spring Boot "Hello World" application to a Kubernetes cluster using Minikube and Docker. Please let me know if you have any questions or run into any issues!
 
-<img width="745" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/1b7f1219-8015-4969-a17f-21273cf9e6cc">
-<img width="1405" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/5ffdb18f-c039-4978-9719-a50a4524f1c7">
-
+<img width="760" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/0e5a2c13-6e20-4ca0-86a3-aac860d750e6">
+<img width="1728" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/19c1f448-8b96-4b85-869d-a97685f5354b">
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
