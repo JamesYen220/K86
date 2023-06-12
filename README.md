@@ -194,6 +194,39 @@ That's it! You've successfully deployed your Spring Boot "Hello World" applicati
 <img width="1405" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/5ffdb18f-c039-4978-9719-a50a4524f1c7">
 
 
+**Deployment or Pods not working**
+
+```bash
+kubectl describe deployment helloworld-deployment
+```
+
+This will create the deployment in our Kubernetes cluster. You can check the status of the deployment with the following command:
+
+```bash
+kubectl get deployments
+```
+<img width="486" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/e0d0a4e9-1ac3-4084-b375-45c916324d88">
+
+
+This command will show you the events and configuration related to your `helloworld-deployment`. Look for any warning or error messages in the output.
+
+You can also check the logs of the pods themselves. First, get the pod names:
+
+```bash
+kubectl get pods
+```
+<img width="767" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/ef04c585-4432-4e3c-acf0-4224211fc707">
+
+
+Then, you can get the logs of a specific pod by using its name:
+
+```bash
+kubectl logs <pod-name>
+```
+
+Replace `<pod-name>` with the name of one of the pods that's not running properly. This should give you more insight into what might be going wrong.
+
+As a general note, issues with pods not starting can be due to various reasons including image pull errors (e.g., the image does not exist or the image pull policy is not set correctly), configuration errors (e.g., the port specified in the configuration does not match the port the application is using), resource limits (e.g., not enough memory or CPU available), etc.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
