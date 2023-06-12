@@ -226,7 +226,6 @@ kubectl logs <pod-name>
 
 Replace `<pod-name>` with the name of one of the pods that's not running properly. This should give you more insight into what might be going wrong.
 
-As a general note, issues with pods not starting can be due to various reasons including image pull errors (e.g., the image does not exist or the image pull policy is not set correctly), configuration errors (e.g., the port specified in the configuration does not match the port the application is using), resource limits (e.g., not enough memory or CPU available), etc.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
