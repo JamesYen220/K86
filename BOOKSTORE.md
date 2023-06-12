@@ -112,9 +112,15 @@ This will create the deployment in our Kubernetes cluster. You can check the sta
 ```bash
 kubectl get deployments
 ```
-<img width="466" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/842857eb-1f6f-4e5e-a98b-2dcde940e048">
+<img width="584" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/b1519288-e938-4d89-a555-3b7b2c674ede">
 
-You should see your `hello-world` listed.
+```bash
+kubectl get pods
+```
+<img width="642" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/3d8ec59a-ab5a-4f74-ac6a-aa9b355d752e">
+
+
+You should see your `bookstore` listed.
 
 
 **Deployment or Pods not working**
