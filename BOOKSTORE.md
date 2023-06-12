@@ -25,9 +25,8 @@ It is importnat to change spring.datasource.url=jdbc:mysql://10.119.12.43:3306/s
 
 ```Dockerfile
 FROM openjdk:11
-EXPOSE 8080
-ADD target/bookstore-0.0.1-SNAPSHOT.jar bookstore.jar
-ENTRYPOINT ["java","-jar","/bookstore.jar"]
+ADD target/ORM_backend-0.0.1-SNAPSHOT.jar ORM_backend.jar
+ENTRYPOINT ["java","-jar","/ORM_backend.jar"]
 ```
 
 3. To create the Docker image, first you need to build your application. Navigate to the root directory of your application in terminal and run the following command: 
@@ -130,7 +129,7 @@ You should see your `bookstore` listed.
 **Deployment or Pods not working**
 
 ```bash
-kubectl describe deployment helloworld-deployment
+kubectl describe deployment bookstore-deployment
 ```
 
 This will create the deployment in our Kubernetes cluster. You can check the status of the deployment with the following command:
@@ -141,7 +140,7 @@ kubectl get deployments
 <img width="486" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/e0d0a4e9-1ac3-4084-b375-45c916324d88">
 
 
-This command will show you the events and configuration related to your `helloworld-deployment`. Look for any warning or error messages in the output.
+This command will show you the events and configuration related to your `bookstore-deployment`. Look for any warning or error messages in the output.
 
 You can also check the logs of the pods themselves. First, get the pod names:
 
@@ -163,7 +162,7 @@ Replace `<pod-name>` with the name of one of the pods that's not running properl
 Now we need to expose the deployment as a service so we can access it. Run the following command:
 
 ```bash
-kubectl expose deployment hello-world --type=NodePort --port=8080
+kubectl expose deployment bookstore --type=NodePort --port=8080
 ```
 
 This will create a service that exposes our application to external traffic. By specifying `type=NodePort`, Kubernetes will allocate a port on each node for our service.
@@ -182,10 +181,6 @@ Finally, to access the application, you can ask Minikube to give you the URL of 
 ```bash
 minikube service bookstore --url
 ```
-
-When you navigate to this URL in a web browser, you should see your "Hello, world!" message.
-
-That's it! You've successfully deployed your Spring Boot "Hello World" application to a Kubernetes cluster using Minikube and Docker. Please let me know if you have any questions or run into any issues!
 
 <img width="760" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/0e5a2c13-6e20-4ca0-86a3-aac860d750e6">
 <img width="1728" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/19c1f448-8b96-4b85-869d-a97685f5354b">
@@ -219,7 +214,7 @@ spec:
   targetCPUUtilizationPercentage: 50
 ```
 
-This configuration will create a Horizontal Pod Autoscaler that manages the number of pods in the `hello-world` deployment. The number of pods will be between `minReplicas` and `maxReplicas`, scaling based on CPU utilization. In this case, if the average CPU utilization across all pods exceeds 50%, Kubernetes will start creating new pods. If CPU utilization drops below 50%, it will start removing pods, down to a minimum of 1.
+This configuration will create a Horizontal Pod Autoscaler that manages the number of pods in the `bookstore` deployment. The number of pods will be between `minReplicas` and `maxReplicas`, scaling based on CPU utilization. In this case, if the average CPU utilization across all pods exceeds 50%, Kubernetes will start creating new pods. If CPU utilization drops below 50%, it will start removing pods, down to a minimum of 1.
 
 3. You can apply this configuration with `kubectl apply -f hpa.yaml`, if you put it in a separate file named `hpa.yaml`.
 <img width="600" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/990d3b10-ced4-4d50-8c3b-3847f5ff892e">
@@ -418,19 +413,16 @@ Once your application is exposing metrics, you can add a `ServiceMonitor` to tel
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: hello-world-monitor
+  name: bookstore-monitor
   labels:
     team: frontend
 spec:
   selector:
     matchLabels:
-      app: hello-world
+      app: bookstore
   endpoints:
-  - port: web
-    path: /actuator/prometheus
-```
-```shell
-kubectl apply -f servicemonitor.yaml
+    - port: web
+      path: /actuator/prometheus
 ```
 
 
