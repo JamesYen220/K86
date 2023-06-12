@@ -208,12 +208,12 @@ Here's how you can set it up:
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: hello-world-hpa
+  name: bookstore-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: hello-world
+    name: bookstore
   minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 50
@@ -222,6 +222,8 @@ spec:
 This configuration will create a Horizontal Pod Autoscaler that manages the number of pods in the `hello-world` deployment. The number of pods will be between `minReplicas` and `maxReplicas`, scaling based on CPU utilization. In this case, if the average CPU utilization across all pods exceeds 50%, Kubernetes will start creating new pods. If CPU utilization drops below 50%, it will start removing pods, down to a minimum of 1.
 
 3. You can apply this configuration with `kubectl apply -f hpa.yaml`, if you put it in a separate file named `hpa.yaml`.
+<img width="600" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/990d3b10-ced4-4d50-8c3b-3847f5ff892e">
+
 
 4. To check the status of the HPA, you can use the command `kubectl get hpa`.
 
@@ -229,8 +231,7 @@ Remember that HPA is based on the metrics available in your cluster. The example
 
 Also note that this is a basic example and actual values for `minReplicas`, `maxReplicas` and `averageUtilization` should be chosen based on the requirements of your specific application and environment.
 
-<img width="770" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/eae039a5-80be-48b5-b5ad-56234b37a12c">
-
+<img width="757" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/ab0326bc-c217-4183-8c3f-ca39daa9acf9">
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
