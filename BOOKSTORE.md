@@ -231,7 +231,7 @@ Remember that HPA is based on the metrics available in your cluster. The example
 
 Also note that this is a basic example and actual values for `minReplicas`, `maxReplicas` and `averageUtilization` should be chosen based on the requirements of your specific application and environment.
 
-<img width="771" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/f46d264b-5957-4609-b19d-7c3482f7d50d">
+<img width="771" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/f46d264b-5957-4609-b19d-7c3482f7d50d">  
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
