@@ -31,7 +31,8 @@ Docker plays a crucial role in the relationship between Kubectl, Kubernetes, and
 
 In summary, Docker provides the containerization technology that Kubernetes leverages to deploy and manage applications. Minikube, as a local Kubernetes cluster, uses Docker as the container runtime. Kubectl interacts with Kubernetes, which in turn manages the containers using Docker. Docker, therefore, plays a crucial role in containerization, while Kubernetes and Minikube provide the orchestration and management layers for running containers in a scalable and distributed manner.
 
-Let's break down each step:
+Learn More: https://www.bilibili.com/video/BV13Q4y1C7hS?p=14&spm_id_from=pageDriver&vd_source=e89b2dd5994f0e82f6841422969e2b5e
+
 
 **Step 1: Create a Java Spring Boot application**
 
