@@ -242,11 +242,11 @@ Also note that this is a basic example and actual values for `minReplicas`, `max
 
 
 Result:  
-<img width="507" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/f3489b17-dc96-4d6b-9ac6-5b31471cd975">. 
-<img width="760" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/dc78b517-cb83-436f-8f57-a576a0d501b2">. 
 <img width="762" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/db8f7c45-3e74-498e-a00d-c37770107482">. 
 <img width="521" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/80a7eaae-a758-470b-a060-f826715bc758">. 
 <img width="752" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/8f5618d1-add6-49b5-9a00-92f22d81d377">. 
+<img width="507" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/f3489b17-dc96-4d6b-9ac6-5b31471cd975">. 
+<img width="760" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/dc78b517-cb83-436f-8f57-a576a0d501b2">. 
 
 
 After Cooldown:  
