@@ -458,5 +458,7 @@ This command will list all the services in the "monitoring" namespace. Look for 
 <img width="1728" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/5ac28384-4fa1-427b-bfda-0ffa3159d600">
 
 4. You can also query your application's metrics: type the metric's name into the "Expression" input field and click "Execute".
+<img width="1728" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/0b616c1e-dc8d-49bf-a6c7-75d335aa7e0e">
+
 
 Remember to replace `prometheus-operator-prometheus` with the service name of your Prometheus instance if you named it differently.
