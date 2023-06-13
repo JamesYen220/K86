@@ -78,6 +78,9 @@ spec:
       containers:
         - name: bookstore
           image: jamesyen220/bookstore:latest
+          resources:
+            requests:
+              cpu: 100m
           ports:
             - containerPort: 8080
 ---
@@ -227,6 +230,29 @@ Remember that HPA is based on the metrics available in your cluster. The example
 Also note that this is a basic example and actual values for `minReplicas`, `maxReplicas` and `averageUtilization` should be chosen based on the requirements of your specific application and environment.
 
 <img width="771" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/f46d264b-5957-4609-b19d-7c3482f7d50d">  
+
+
+**Testing with JUNIT** 
+
+<img width="1379" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/cd9f3dde-5028-4ff1-8bc5-f198123a7999">
+<img width="1383" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/e5f62f32-53d3-4aac-a406-8f28205a3570">
+<img width="1387" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/9aad6013-953f-4d4f-be88-454daf4a546e">
+
+<img width="507" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/f3489b17-dc96-4d6b-9ac6-5b31471cd975">
+<img width="760" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/dc78b517-cb83-436f-8f57-a576a0d501b2">
+
+
+Result:
+<img width="762" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/db8f7c45-3e74-498e-a00d-c37770107482">
+<img width="521" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/80a7eaae-a758-470b-a060-f826715bc758">
+<img width="752" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/8f5618d1-add6-49b5-9a00-92f22d81d377">
+
+
+After Cooldown:
+<img width="769" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/3940b43f-816c-478e-a22d-41caf74be177">
+<img width="510" alt="image" src="https://github.com/JamesYen220/K86/assets/100248639/1c0f075f-a111-4525-be78-78aa0401862e">
+
+
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
